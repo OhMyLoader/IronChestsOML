@@ -12,11 +12,11 @@ import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler
 import com.gathertocraft.ironchest.screenhandlers.SizedContainerMenu
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
-import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import net.minecraft.world.level.block.entity.BlockEntityType
+import org.ohmyloader.api26_3.OMLCreativeTabs
 import org.ohmyloader.api26_3.OMLRegistration
 
 /** Every registration, expressed through the OML registration helpers: they apply the resource
@@ -68,11 +68,13 @@ object Registrars {
     }
 
     private fun registerCreativeTab(chestItems: Map<String, Item>) {
-        OMLRegistration.registerCreativeTab(
-            "general",
-            Component.translatable("itemGroup.ironchest.general"),
-            { ItemStack(requireNotNull(chestItems["iron_chest"])) },
-        ) { TAB_ORDER.mapNotNull(chestItems::get) }
+        OMLCreativeTabs.declare("general") {
+            title = Component.translatable("itemGroup.ironchest.general")
+            icon = { ItemStack(requireNotNull(chestItems["iron_chest"])) }
+            // The chest tab lands right after vanilla's ingredient category.
+            after("minecraft:ingredients")
+            display { TAB_ORDER.mapNotNull(chestItems::get) }
+        }
     }
 
     private fun registerBlockEntityTypes() {
