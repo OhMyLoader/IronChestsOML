@@ -25,17 +25,8 @@ import net.minecraft.world.level.block.state.BlockState
 class GenericChestOpenersCounter(private val chest: GenericChestEntity) : ContainerOpenersCounter() {
 
     override fun isOwnContainer(player: Player): Boolean {
-        val menu = player.containerMenu as? ChestScreenHandler
-        if (menu == null) {
-            java.io.File("debug-lid.log")
-                .appendText("[server] isOwnContainer menu=NULL other=${player.containerMenu?.javaClass?.name}\n")
-            return false
-        }
-        val idMatch = menu.blockInventory === chest
-        val posMatch = menu.chestBlockPos == chest.blockPos
-        java.io.File("debug-lid.log")
-            .appendText("[server] isOwnContainer idMatch=$idMatch posMatch=$posMatch chest=${chest.hashCode()} menuContainer=${menu.blockInventory.hashCode()} pos=${chest.blockPos}\n")
-        return idMatch || posMatch
+        val menu = player.containerMenu as? ChestScreenHandler ?: return false
+        return menu.blockInventory === chest || menu.chestBlockPos == chest.blockPos
     }
 
     override fun onOpen(level: Level, pos: BlockPos, state: BlockState) {
@@ -48,16 +39,7 @@ class GenericChestOpenersCounter(private val chest: GenericChestEntity) : Contai
 
     /** Mirrors vanilla's `ChestBlockEntity.signalOpenCount`: the lid animates client-side through
      * the block event that carries the new open count. */
-    /** TEMPORARY debug: measures the recount list the recheck bases its decision on. */
-    override fun recheckOpeners(level: Level, pos: BlockPos, state: BlockState) {
-        val size = getEntitiesWithContainerOpen(level, pos).size
-        java.io.File("debug-lid.log")
-            .appendText("[server] recheckOpeners listSize=$size pos=${chest.blockPos}\n")
-        super.recheckOpeners(level, pos, state)
-    }
-
     override fun openerCountChanged(level: Level, pos: BlockPos, state: BlockState, oldCount: Int, newCount: Int) {
-        java.io.File("debug-lid.log").appendText("[server] openerCountChanged old=$oldCount new=$newCount isClient=${level.isClientSide}\n")
         level.blockEvent(pos, state.block, 1, newCount)
     }
 

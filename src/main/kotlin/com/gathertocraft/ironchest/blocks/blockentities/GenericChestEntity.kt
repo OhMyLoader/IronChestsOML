@@ -52,13 +52,11 @@ open class GenericChestEntity(
     private var openViewers = 0
 
     override fun startOpen(user: net.minecraft.world.entity.ContainerUser) {
-        java.io.File("debug-lid.log").appendText("[server] startOpen openViewers=${openViewers + 1}\n")
         super.startOpen(user)
         openViewers++
     }
 
     override fun stopOpen(user: net.minecraft.world.entity.ContainerUser) {
-        java.io.File("debug-lid.log").appendText("[server] stopOpen openViewers=$openViewers\n")
         super.stopOpen(user)
         if (openViewers > 0) openViewers--
     }
