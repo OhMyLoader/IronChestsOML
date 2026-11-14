@@ -17,12 +17,15 @@ lid animation, and copper-golem deposit support.
   and `CreativeModeTab.Output`; Fabric reaches them through transitive access wideners. OML has no
   widener pass, so these three touch points go through one reflective bridge each
   (`registry/Registrars.kt`, `client/ClientBridges.kt`) — contained, run once per registration.
-- Of the three Fabric mixins, two disappear: the lid animation needs nothing (our menus call
-  `startOpen`/`stopOpen` like vanilla's), and the viewer count — vanilla's static `getOpenCount`
-  only recognizes vanilla `ChestMenu`s — is replaced by an own open-viewer counter on the block
-  entity, which the upgrade item consults. The copper-golem interaction stays a hook:
-  `@WrapMethod` around `TransportItemsBetweenContainers.isWantedBlock` (a RETURN HookValue
-  degrades to notify — short-circuiting only lands at method-entry anchors).
+- The viewer-count mixin is restructured, not dropped: vanilla's openers counter recognizes
+  only vanilla `ChestMenu`s and its scheduled recheck recounts live menus with that test, so any
+  menu we open is counted back to zero a tick later (no lid animation, upgrade gate dead). The
+  block entity swaps the private `openersCounter` field — reached through an `@FieldAccess`
+  accessor on the nameable `ChestBlockEntity`, no anonymous-class self needed — for a subclass
+  whose `isOwnContainer` knows our menus; an own open-viewer counter feeds the upgrade gate.
+  The copper-golem interaction stays a hook: `@WrapMethod` around
+  `TransportItemsBetweenContainers.isWantedBlock` (a RETURN HookValue degrades to notify —
+  short-circuiting only lands at method-entry anchors).
 - ironchest.json (jankson) → the loader's TOML config (`config/ironchest.toml`): per-tier row
   counts (1–12), open-under-solid-blocks, copper-golem interaction.
 - Not ported (v2): the ironcore key/lock system, the hand truck, and the pre-3.0 legacy upgrade
