@@ -59,6 +59,14 @@ object Registrars {
                 type,
             )
             Registry.register(BuiltInRegistries.BLOCK, id, block)
+            // Vanilla registers each block's states into BLOCK_STATE_REGISTRY and initializes their
+            // occlusion-shape caches inside its own static init - a step our freeze-phase blocks
+            // miss, and without it the first render pass NPEs (getFaceOcclusionShape reads an
+            // uninitialized cache) and Block.getId answers -1.
+            for (state in block.stateDefinition.possibleStates) {
+                net.minecraft.world.level.block.Block.BLOCK_STATE_REGISTRY.add(state)
+                state.initCache()
+            }
             type.bindBlock(block)
             // Christmas and Dirt stay outside the upgrade ladder - they are craft-only.
             type.materialTier?.let { tier -> UpgradeItem.bindTier(block, tier) }
