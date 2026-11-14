@@ -14,9 +14,10 @@ lid animation, and copper-golem deposit support.
 - `FabricBlockEntityTypeBuilder` / `FabricCreativeModeTab` / `CreativeModeTabEvents` → the vanilla
   registry constructors (`BlockEntityType`, `CreativeModeTab.builder`).
 - 26.3 privatized `MenuType`'s constructor, `MenuScreens.register`, `BlockEntityRenderers.register`
-  and `CreativeModeTab.Output`; Fabric reaches them through transitive access wideners. OML has no
-  widener pass, so these three touch points go through one reflective bridge each
-  (`registry/Registrars.kt`, `client/ClientBridges.kt`) — contained, run once per registration.
+  and `CreativeModeTab.Output`; Fabric reaches them through transitive access wideners. OML now
+  carries these bridges itself (`org.ohmyloader.api26_3.OMLRegistration`), alongside the block-state
+  bookkeeping (state registry + caches) and the creative-tab slot picking — the registration helpers
+  this mod was the first real user of.
 - The viewer-count mixin is restructured, not dropped: vanilla's openers counter recognizes
   only vanilla `ChestMenu`s and its scheduled recheck recounts live menus with that test, so any
   menu we open is counted back to zero a tick later (no lid animation, upgrade gate dead). The

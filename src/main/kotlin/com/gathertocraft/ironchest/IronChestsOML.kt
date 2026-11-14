@@ -1,7 +1,6 @@
 package com.gathertocraft.ironchest
 
 import com.gathertocraft.ironchest.blocks.ChestTypes
-import com.gathertocraft.ironchest.client.ClientBridges
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler
 import com.gathertocraft.ironchest.client.ChestEntityRenderer
 import com.gathertocraft.ironchest.client.ChestScreen
@@ -9,10 +8,8 @@ import com.gathertocraft.ironchest.blocks.GenericChestBlock
 import com.gathertocraft.ironchest.config.ChestRowsConfig
 import com.gathertocraft.ironchest.registry.Registrars
 import com.gathertocraft.ironchest.support.CopperGolemSupport
-import net.minecraft.core.registries.Registries
 import net.minecraft.resources.Identifier
-import net.minecraft.resources.ResourceKey
-import net.minecraft.world.item.CreativeModeTab
+import org.ohmyloader.api26_3.OMLRegistration
 import org.ohmyloader.api.Mod
 import org.ohmyloader.api.ModContext
 import org.ohmyloader.api.OMLModInitializer
@@ -51,10 +48,13 @@ class IronChestsOML : OMLRegistryInitializer, OMLModInitializer {
         // static maps; the dedicated server must not touch them.
         if (!isClient()) return
         for (type in ChestTypes.PLAYABLE) {
-            ClientBridges.registerMenuScreen(type.registeredMenuType) { menu, inventory, title ->
+            OMLRegistration.registerMenuScreen(type.registeredMenuType) { menu, inventory, title ->
                 ChestScreen(menu as ChestScreenHandler, inventory, title)
             }
-            ClientBridges.registerBlockEntityRenderer(type.registeredBlockEntityType, ::ChestEntityRenderer)
+            @Suppress("UNCHECKED_CAST")
+            val entityType = type.registeredBlockEntityType
+                as net.minecraft.world.level.block.entity.BlockEntityType<com.gathertocraft.ironchest.blocks.blockentities.GenericChestEntity>
+            OMLRegistration.registerBlockEntityRenderer(entityType, ::ChestEntityRenderer)
         }
     }
 
@@ -63,12 +63,6 @@ class IronChestsOML : OMLRegistryInitializer, OMLModInitializer {
 
     companion object {
         const val MOD_ID = "ironchest"
-
-        /** The creative tab the chest items land in. */
-        val TAB: ResourceKey<CreativeModeTab> = ResourceKey.create(
-            Registries.CREATIVE_MODE_TAB,
-            Identifier.fromNamespaceAndPath(MOD_ID, "general"),
-        )
 
         fun id(path: String): Identifier = Identifier.fromNamespaceAndPath(MOD_ID, path)
     }
