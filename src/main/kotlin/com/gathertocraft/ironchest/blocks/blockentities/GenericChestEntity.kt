@@ -36,6 +36,14 @@ open class GenericChestEntity(
 
     init {
         setItems(NonNullList.withSize(tier.size, ItemStack.EMPTY))
+        // Swap the vanilla counter for one that recognizes our menus: the vanilla anonymous
+        // counter's isOwnContainer only matches ChestMenu, and its scheduled recheck recounts
+        // live menus with it - a chest we open is counted back to zero one tick later, killing
+        // the lid animation. The field lives on the (nameable) ChestBlockEntity, so accessor
+        // synthesis reaches it without touching the anonymous counter class.
+        (this as com.gathertocraft.ironchest.hooks.ChestBlockEntityAccess).setOpenersCounter(
+            GenericChestOpenersCounter(this),
+        )
     }
 
     /** How many menus are currently open on this chest, our own count: the vanilla static
@@ -44,11 +52,13 @@ open class GenericChestEntity(
     private var openViewers = 0
 
     override fun startOpen(user: net.minecraft.world.entity.ContainerUser) {
+        java.io.File("debug-lid.log").appendText("[server] startOpen openViewers=${openViewers + 1}\n")
         super.startOpen(user)
         openViewers++
     }
 
     override fun stopOpen(user: net.minecraft.world.entity.ContainerUser) {
+        java.io.File("debug-lid.log").appendText("[server] stopOpen openViewers=$openViewers\n")
         super.stopOpen(user)
         if (openViewers > 0) openViewers--
     }
