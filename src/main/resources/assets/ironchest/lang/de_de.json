@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "Kupfertruhe",
+  "block.ironchest.iron_chest": "Eisentruhe",
+  "block.ironchest.gold_chest": "Goldtruhe",
+  "block.ironchest.diamond_chest": "Diamantentruhe",
+  "block.ironchest.emerald_chest": "Smaragdtruhe",
+  "block.ironchest.crystal_chest": "Kristalltruhe",
+  "block.ironchest.obsidian_chest": "Obsidiantruhe",
+  "block.ironchest.netherite_chest": "Netherittruhe",
+  "block.ironchest.christmas_chest": "Weihnachtstruhe",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

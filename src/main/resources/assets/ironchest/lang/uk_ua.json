@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "Мідна скриня",
+  "block.ironchest.iron_chest": "Залізна скриня",
+  "block.ironchest.gold_chest": "Золота скриня",
+  "block.ironchest.diamond_chest": "Діамантова скриня",
+  "block.ironchest.emerald_chest": "Смарагдова скриня",
+  "block.ironchest.crystal_chest": "Кришталева скриня",
+  "block.ironchest.obsidian_chest": "Обсидіанова скриня",
+  "block.ironchest.netherite_chest": "Незеритова скриня",
+  "block.ironchest.christmas_chest": "Різдвяна скриня",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

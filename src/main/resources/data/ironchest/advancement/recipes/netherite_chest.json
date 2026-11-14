@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond_emerald_obsidian_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ironchest:diamond_emerald_obsidian_chests"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "ironchest:netherite_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_emerald_obsidian_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ironchest:netherite_chest"
+    ]
+  }
+}

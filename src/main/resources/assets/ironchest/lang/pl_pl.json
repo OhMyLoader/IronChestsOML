@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "Miedziana skrzynia",
+  "block.ironchest.iron_chest": "Żelazna skrzynia",
+  "block.ironchest.gold_chest": "Złota skrzynia",
+  "block.ironchest.diamond_chest": "Diamentowa skrzynia",
+  "block.ironchest.emerald_chest": "Szmaragdowa skrzynia",
+  "block.ironchest.crystal_chest": "Krystaliczna skrzynia",
+  "block.ironchest.obsidian_chest": "Obsydianowa skrzynia",
+  "block.ironchest.netherite_chest": "Netherytowa skrzynia",
+  "block.ironchest.christmas_chest": "Świąteczna skrzynia",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

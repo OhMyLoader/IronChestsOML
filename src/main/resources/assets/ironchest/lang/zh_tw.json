@@ -1,0 +1,11 @@
+{
+  "block.ironchest.copper_chest": "銅箱",
+  "block.ironchest.iron_chest": "鐵箱",
+  "block.ironchest.gold_chest": "金箱",
+  "block.ironchest.diamond_chest": "鑽石箱",
+  "block.ironchest.emerald_chest": "綠寶石箱",
+  "block.ironchest.crystal_chest": "水晶箱",
+  "block.ironchest.obsidian_chest": "黑曜石箱",
+  "block.ironchest.christmas_chest": "聖誕箱",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

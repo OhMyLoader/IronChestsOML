@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "Медный сундук",
+  "block.ironchest.iron_chest": "Железный сундук",
+  "block.ironchest.gold_chest": "Золотой сундук",
+  "block.ironchest.diamond_chest": "Алмазный сундук",
+  "block.ironchest.emerald_chest": "Изумрудный сундук",
+  "block.ironchest.crystal_chest": "Кристальный сундук",
+  "block.ironchest.obsidian_chest": "Обсидиановый сундук",
+  "block.ironchest.netherite_chest": "Незеритовый сундук",
+  "block.ironchest.christmas_chest": "Рождественский сундук",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "ironchest:ironchest/obsidian_chest",
+  "criteria": {
+    "has_netherite_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:netherite_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.netherite_chest.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironchest:netherite_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.netherite_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_netherite_chest"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

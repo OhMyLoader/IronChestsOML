@@ -1,0 +1,42 @@
+# IronChestsOML
+
+Iron Chests on OML (OhMyLoader) — a GPL-3.0 port of
+[4nner/IronChests](https://github.com/4nner/IronChests) (the `26.3` fabric/common line) to OML's
+unobfuscated-jar mod surface. Every chest tier ships: dirt, copper, iron, gold, diamond, emerald,
+crystal, obsidian, netherite and christmas — with the shift-right-click upgrade items, the chest
+lid animation, and copper-golem deposit support.
+
+## What the port changed
+
+- Fabric `ModInitializer` (runs before registry freeze) → OML's registry-declare phase
+  (`OMLRegistryInitializer.onDeclareRegistries`); `ClientModInitializer` work runs in
+  `onInitialize` guarded to the client side.
+- `FabricBlockEntityTypeBuilder` / `FabricCreativeModeTab` / `CreativeModeTabEvents` → the vanilla
+  registry constructors (`BlockEntityType`, `CreativeModeTab.builder`).
+- 26.3 privatized `MenuType`'s constructor, `MenuScreens.register`, `BlockEntityRenderers.register`
+  and `CreativeModeTab.Output`; Fabric reaches them through transitive access wideners. OML has no
+  widener pass, so these three touch points go through one reflective bridge each
+  (`registry/Registrars.kt`, `client/ClientBridges.kt`) — contained, run once per registration.
+- The three Fabric mixins → OML `@Hooked` carriers: the openers-counter accessor (`this$0` via
+  `@FieldAccess`), the viewer-count return hook (`isOwnContainer`), and the copper-golem
+  interaction (`TransportItemsBetweenContainers.isWantedBlock`).
+- ironchest.json (jankson) → the loader's TOML config (`config/ironchest.toml`): per-tier row
+  counts (1–12), open-under-solid-blocks, copper-golem interaction.
+- Not ported (v2): the ironcore key/lock system, the hand truck, and the pre-3.0 legacy upgrade
+  item migration (a new world never needs it).
+
+## Build and run
+
+```bash
+gradlew build      # jar under build/libs
+gradlew runClient  # launch the game with the mod installed
+```
+
+The loader, plugin and game jar resolve through the OML Gradle plugin; run
+`gradlew publishToMavenLocal` in the sibling `OhMyLoader/` checkout first when its API changed.
+
+## License
+
+Iron Chests is licensed GPL-3.0 (code and assets alike); this port is a derivative work and
+carries the same license — see [LICENSE](LICENSE). The reference sources live in a sibling
+`ironchests-reference/` checkout for provenance; nothing here builds against it.

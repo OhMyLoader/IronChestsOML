@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "구리 상자",
+  "block.ironchest.iron_chest": "철 상자",
+  "block.ironchest.gold_chest": "금 상자",
+  "block.ironchest.diamond_chest": "다이아몬드 상자",
+  "block.ironchest.emerald_chest": "에메랄드 상자",
+  "block.ironchest.crystal_chest": "수정 상자",
+  "block.ironchest.obsidian_chest": "흑요석 상자",
+  "block.ironchest.netherite_chest": "네더라이트 상자",
+  "block.ironchest.christmas_chest": "크리스마스 상자",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

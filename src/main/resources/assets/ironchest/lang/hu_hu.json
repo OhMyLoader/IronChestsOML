@@ -1,0 +1,12 @@
+{
+  "block.ironchest.copper_chest": "Rézláda",
+  "block.ironchest.iron_chest": "Vasláda",
+  "block.ironchest.gold_chest": "Aranyláda",
+  "block.ironchest.diamond_chest": "Gyémántláda",
+  "block.ironchest.emerald_chest": "Emeráldláda",
+  "block.ironchest.crystal_chest": "Kristályláda",
+  "block.ironchest.obsidian_chest": "Obszidiánláda",
+  "block.ironchest.netherite_chest": "Netheritláda",
+  "block.ironchest.christmas_chest": "Karácsonyi láda",
+  "itemGroup.ironchest.general": "Iron Chests"
+}

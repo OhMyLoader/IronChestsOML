@@ -1,0 +1,11 @@
+{
+  "block.ironchest.copper_chest": "Baú de cobre",
+  "block.ironchest.iron_chest": "Baú de ferro",
+  "block.ironchest.gold_chest": "Baú de ouro",
+  "block.ironchest.diamond_chest": "Baú de diamante",
+  "block.ironchest.emerald_chest": "Baú de esmeralda",
+  "block.ironchest.crystal_chest": "Baú de cristal",
+  "block.ironchest.obsidian_chest": "Baú de obsidiana",
+  "block.ironchest.christmas_chest": "Baú de natal",
+  "itemGroup.ironchest.general": "Baús de Ferro"
+}

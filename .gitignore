@@ -1,0 +1,10 @@
+# Gradle
+.gradle/
+build/
+
+# OML dev runtime (downloaded game, assets, world data)
+run/
+
+# IDE
+.idea/
+*.iml

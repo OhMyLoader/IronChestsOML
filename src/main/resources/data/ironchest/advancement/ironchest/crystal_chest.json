@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/diamond_chest",
+  "criteria": {
+    "has_crystal_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:crystal_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.crystal_chest.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironchest:crystal_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.crystal_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_chest"
+    ]
+  ]
+}

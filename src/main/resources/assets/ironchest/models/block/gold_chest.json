@@ -1,0 +1,6 @@
+{
+    "parent": "ironchest:block/chest_template",
+    "textures": {
+        "particle": "minecraft:block/gold_block"
+    }
+}
