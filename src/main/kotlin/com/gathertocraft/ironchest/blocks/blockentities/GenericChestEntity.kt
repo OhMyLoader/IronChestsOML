@@ -38,11 +38,24 @@ open class GenericChestEntity(
         setItems(NonNullList.withSize(tier.size, ItemStack.EMPTY))
     }
 
-    /** True when nobody is using this chest and it may be transformed in place by an upgrade. */
-    fun isAvailableForUpgrade(player: Player): Boolean {
-        val level = this.level ?: return false
-        return ChestBlockEntity.getOpenCount(level, blockPos) == 0 && stillValid(player)
+    /** How many menus are currently open on this chest, our own count: the vanilla static
+     * `getOpenCount` only recognizes vanilla `ChestMenu`s, so the upgrade item asks here instead.
+     * `startOpen` / `stopOpen` drive the vanilla lid counter too, so one callback pair feeds both. */
+    private var openViewers = 0
+
+    override fun startOpen(user: net.minecraft.world.entity.ContainerUser) {
+        super.startOpen(user)
+        openViewers++
     }
+
+    override fun stopOpen(user: net.minecraft.world.entity.ContainerUser) {
+        super.stopOpen(user)
+        if (openViewers > 0) openViewers--
+    }
+
+    /** True when nobody is using this chest and it may be transformed in place by an upgrade. */
+    fun isAvailableForUpgrade(player: Player): Boolean =
+        openViewers == 0 && stillValid(player)
 
     override fun getContainerSize(): Int =
         if (sizingForLoad) maxCapacity() else tier.size

@@ -84,7 +84,11 @@ object Registrars {
     }
 
     private fun registerCreativeTab(chestItems: Map<String, Item>) {
-        val tab = CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+        // The builder pins a (row, column) slot and `CreativeModeTabs.validate` refuses collisions.
+        // The slot cannot be picked by reading the registry at declare time (the vanilla tabs are
+        // still unbound holders there), so it tracks vanilla's layout: both rows ship columns 0..6,
+        // and the first free bottom-row column is 7.
+        val tab = CreativeModeTab.builder(CreativeModeTab.Row.BOTTOM, 7)
             .title(Component.translatable("itemGroup.ironchest.general"))
             .icon { ItemStack(requireNotNull(chestItems["iron_chest"])) }
             .displayItems(displayItemsGenerator { TAB_ORDER.mapNotNull(chestItems::get) })
