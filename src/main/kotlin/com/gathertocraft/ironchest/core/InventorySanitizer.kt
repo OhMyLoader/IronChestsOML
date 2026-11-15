@@ -5,7 +5,9 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemStack
 
 /** Clamps stacks into what `ItemStack.validateStrict` accepts: a corrupted item must never crash
- * the game from inside a chest — it degrades to empty instead. Applied on set, save and resize. */
+ * the game from inside a chest — it degrades to empty instead. Applied on set, save and resize.
+ * A stack that is already valid passes through **as the same instance** — every slot mutation and
+ * every save used to pay a full stack copy (with its component map) for nothing. */
 object InventorySanitizer {
 
     fun sanitize(items: NonNullList<ItemStack>) {
@@ -16,7 +18,10 @@ object InventorySanitizer {
     }
 
     fun sanitize(stack: ItemStack): ItemStack {
-        if (stack.isEmpty) return ItemStack.EMPTY
+        if (stack.isEmpty || stack.count <= 0) return ItemStack.EMPTY
+        if (stack.count <= stack.maxStackSize && damageInRange(stack) && !ItemStack.validateStrict(stack).isError) {
+            return stack
+        }
 
         val copy = stack.copy()
         if (copy.count <= 0) return ItemStack.EMPTY
@@ -32,5 +37,12 @@ object InventorySanitizer {
         }
 
         return if (ItemStack.validateStrict(copy).isError) ItemStack.EMPTY else copy
+    }
+
+    /** The `DAMAGE` component is in-range without clamping: absent, or within `0..maxDamage`. */
+    private fun damageInRange(stack: ItemStack): Boolean {
+        if (!stack.has(DataComponents.DAMAGE)) return true
+        val damage = stack.getOrDefault(DataComponents.DAMAGE, 0)
+        return damage >= 0 && (stack.maxDamage <= 0 || damage <= stack.maxDamage)
     }
 }

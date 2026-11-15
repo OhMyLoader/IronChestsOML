@@ -16,8 +16,18 @@ import net.minecraft.world.level.block.state.BlockState
  * every change so the renderer can draw the top twelve stacks floating inside it. */
 class CrystalChestEntity(pos: BlockPos, state: BlockState) : GenericChestEntity(ChestTypes.CRYSTAL, pos, state) {
 
-    /** The first twelve non-empty stacks (copies), in slot order. */
-    fun getTopStacks(): NonNullList<ItemStack> {
+    /**
+     * The first twelve non-empty stacks (copies), in slot order. Vanilla's contract is that every
+     * inventory change goes through [setChanged] (setItem, load-then-clamp, clear), so the cache
+     * invalidates there and the renderer — which asks per frame — pays the twelve stack copies
+     * only when the contents actually changed.
+     */
+    private var cachedTopStacks: NonNullList<ItemStack>? = null
+
+    fun getTopStacks(): NonNullList<ItemStack> =
+        cachedTopStacks ?: computeTopStacks().also { cachedTopStacks = it }
+
+    private fun computeTopStacks(): NonNullList<ItemStack> {
         val topStacks = NonNullList.withSize(12, ItemStack.EMPTY)
         var itemCount = 0
         for (stack in items) {
@@ -30,6 +40,7 @@ class CrystalChestEntity(pos: BlockPos, state: BlockState) : GenericChestEntity(
 
     override fun setChanged() {
         super.setChanged()
+        cachedTopStacks = null
         if (level is ServerLevel) {
             (level as ServerLevel).chunkSource.blockChanged(worldPosition)
         }

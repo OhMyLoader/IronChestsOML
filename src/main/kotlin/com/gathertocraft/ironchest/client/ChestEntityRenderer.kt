@@ -38,6 +38,10 @@ class ChestEntityRenderer(context: BlockEntityRendererProvider.Context) :
     private val models: MultiblockChestResources<ChestModel> =
         LAYERS.map { layer -> ChestModel(context.bakeLayer(layer)) }
 
+    /** Per-tier sprite ids, resolved once — the tier→texture mapping is static, and allocating a
+     * `SpriteId` per block entity per frame was pure churn. */
+    private val spriteIds = HashMap<com.gathertocraft.ironchest.blocks.ChestTypes, SpriteId>()
+
     override fun createRenderState(): ChestRenderState = IronChestRenderState()
 
     override fun extractRenderState(
@@ -51,7 +55,7 @@ class ChestEntityRenderer(context: BlockEntityRendererProvider.Context) :
         val renderState = state as IronChestRenderState
         val block = blockEntity.blockState.block
         if (block is GenericChestBlock) {
-            renderState.modSprite = SpriteId(Sheets.CHEST_SHEET, block.getType().texture)
+            renderState.modSprite = spriteIds.computeIfAbsent(block.getType()) { SpriteId(Sheets.CHEST_SHEET, it.texture) }
         }
         if (blockEntity is CrystalChestEntity) {
             renderState.topStacks = blockEntity.getTopStacks()
