@@ -29,3 +29,12 @@ oml {
         extraGameArgs.add("--quickPlaySingleplayer=$world")
     }
 }
+
+// -Poml.runtimeJava=<path-to-java>: run the GAME on that JVM while the build stays on the toolchain
+// (the same switch the verification mod carries).
+providers.gradleProperty("oml.runtimeJava").orNull?.let { runtimeJava ->
+    tasks.withType<JavaExec>().configureEach {
+        setExecutable(runtimeJava)
+        javaLauncher.set(null)
+    }
+}
