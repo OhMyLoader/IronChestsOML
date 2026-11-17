@@ -1,6 +1,6 @@
 package com.gathertocraft.ironchest.config
 
-import org.ohmyloader.api.config.OMLConfig
+import org.ohmyloader.api.core.config.OMLConfig
 
 /** Row-count options for `<config>/ironchest.toml`. Columns are fixed per tier; only rows are
  * configurable (1–12). Defaults match the baked row counts; invalid values keep the defaults. */

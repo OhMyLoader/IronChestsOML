@@ -9,11 +9,11 @@ import com.gathertocraft.ironchest.config.ChestRowsConfig
 import com.gathertocraft.ironchest.registry.Registrars
 import com.gathertocraft.ironchest.support.CopperGolemSupport
 import net.minecraft.resources.Identifier
-import org.ohmyloader.api.game.OMLRegistration
-import org.ohmyloader.api.Mod
-import org.ohmyloader.api.ModContext
-import org.ohmyloader.api.OMLModInitializer
-import org.ohmyloader.api.OMLRegistryInitializer
+import org.ohmyloader.api.OMLRegistration
+import org.ohmyloader.api.core.Mod
+import org.ohmyloader.api.core.ModContext
+import org.ohmyloader.api.core.OMLModInitializer
+import org.ohmyloader.api.core.OMLRegistryInitializer
 
 /**
  * Iron Chests on OML — a GPL-3.0 port of [4nner/IronChests](https://github.com/4nner/IronChests)

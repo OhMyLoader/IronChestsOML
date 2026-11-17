@@ -2,8 +2,8 @@ package com.gathertocraft.ironchest.hooks
 
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter
 import net.minecraft.world.level.block.entity.ChestBlockEntity
-import org.ohmyloader.api.hook.FieldAccess
-import org.ohmyloader.api.hook.Hooked
+import org.ohmyloader.api.core.hook.FieldAccess
+import org.ohmyloader.api.core.hook.Hooked
 
 /**
  * Synthesized accessors for `ChestBlockEntity`'s private `openersCounter` field. The vanilla

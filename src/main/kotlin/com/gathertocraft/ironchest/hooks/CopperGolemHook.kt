@@ -3,9 +3,9 @@ package com.gathertocraft.ironchest.hooks
 import com.gathertocraft.ironchest.support.CopperGolemSupport
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.level.block.state.BlockState
-import org.ohmyloader.api.hook.Hooked
-import org.ohmyloader.api.hook.Operation
-import org.ohmyloader.api.hook.WrapMethod
+import org.ohmyloader.api.core.hook.Hooked
+import org.ohmyloader.api.core.hook.Operation
+import org.ohmyloader.api.core.hook.WrapMethod
 
 /**
  * Lets copper golems deposit into IronChests containers. Vanilla's behavior hardcodes
