@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.sounds.BlockSoundSets
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
@@ -110,26 +110,26 @@ enum class ChestTypes(
 
     fun blockProperties(): BlockBehaviour.Properties = when (this) {
         COPPER, GOLD ->
-            BlockBehaviour.Properties.of().strength(3.0f, 6.0f).sound(SoundType.COPPER)
+            BlockBehaviour.Properties.of().strength(3.0f, 6.0f).sound(BlockSoundSets.COPPER)
                 .requiresCorrectToolForDrops()
         IRON ->
-            BlockBehaviour.Properties.of().strength(5.0f, 6.0f).sound(SoundType.METAL)
+            BlockBehaviour.Properties.of().strength(5.0f, 6.0f).sound(BlockSoundSets.METAL)
                 .requiresCorrectToolForDrops()
         DIAMOND, EMERALD ->
-            BlockBehaviour.Properties.of().strength(5.0f, 6.0f).sound(SoundType.STONE)
+            BlockBehaviour.Properties.of().strength(5.0f, 6.0f).sound(BlockSoundSets.STONE)
                 .requiresCorrectToolForDrops()
         CRYSTAL ->
-            BlockBehaviour.Properties.of().strength(0.3f, 0.3f).sound(SoundType.AMETHYST)
+            BlockBehaviour.Properties.of().strength(0.3f, 0.3f).sound(BlockSoundSets.AMETHYST_BLOCK)
                 .noOcclusion().requiresCorrectToolForDrops()
         OBSIDIAN ->
-            BlockBehaviour.Properties.of().strength(50.0f, 1200.0f).sound(SoundType.STONE)
+            BlockBehaviour.Properties.of().strength(50.0f, 1200.0f).sound(BlockSoundSets.STONE)
                 .requiresCorrectToolForDrops()
         NETHERITE ->
-            BlockBehaviour.Properties.of().strength(50.0f, 1200.0f).sound(SoundType.NETHERITE_BLOCK)
+            BlockBehaviour.Properties.of().strength(50.0f, 1200.0f).sound(BlockSoundSets.NETHERITE_BLOCK)
                 .requiresCorrectToolForDrops()
         WOOD, CHRISTMAS ->
-            BlockBehaviour.Properties.of().strength(2.5f, 2.5f).sound(SoundType.WOOD)
+            BlockBehaviour.Properties.of().strength(2.5f, 2.5f).sound(BlockSoundSets.WOOD)
         DIRT ->
-            BlockBehaviour.Properties.of().strength(0.5f, 0.5f).sound(SoundType.GRAVEL)
+            BlockBehaviour.Properties.of().strength(0.5f, 0.5f).sound(BlockSoundSets.GRAVEL)
     }
 }

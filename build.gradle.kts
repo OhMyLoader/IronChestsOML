@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlinJvm)
     id("org.ohmyloader.gradle")
@@ -10,7 +12,11 @@ kotlin {
 }
 
 val omlVersion = providers.gradleProperty("oml_version").get()
-val gameVersion = providers.gradleProperty("oml.gameVersion").orElse("26.3").get()
+// The game version is gradle.properties' oml_game_version, read as a file: no `-P` can move it.
+val gameVersion = Properties().apply {
+    file("gradle.properties").inputStream().use { load(it) }
+}.getProperty("oml_game_version")?.takeIf { it.isNotBlank() }
+    ?: error("oml_game_version is missing from gradle.properties")
 
 oml {
     minecraftVersion.set(gameVersion)

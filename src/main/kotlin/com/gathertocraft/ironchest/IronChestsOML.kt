@@ -9,7 +9,7 @@ import com.gathertocraft.ironchest.config.ChestRowsConfig
 import com.gathertocraft.ironchest.registry.Registrars
 import com.gathertocraft.ironchest.support.CopperGolemSupport
 import net.minecraft.resources.Identifier
-import org.ohmyloader.api26_3.OMLRegistration
+import org.ohmyloader.api.game.OMLRegistration
 import org.ohmyloader.api.Mod
 import org.ohmyloader.api.ModContext
 import org.ohmyloader.api.OMLModInitializer

@@ -16,8 +16,8 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.ItemLore
 import net.minecraft.world.level.block.entity.BlockEntityType
-import org.ohmyloader.api26_3.OMLCreativeTabs
-import org.ohmyloader.api26_3.OMLRegistration
+import org.ohmyloader.api.game.OMLCreativeTabs
+import org.ohmyloader.api.game.OMLRegistration
 
 /** Every registration, expressed through the OML registration helpers: they apply the resource
  * keys, replay the block-state bookkeeping (registry + caches) and absorb the 26.3 private-entry

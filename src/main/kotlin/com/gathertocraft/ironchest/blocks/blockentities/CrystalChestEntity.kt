@@ -2,7 +2,7 @@ package com.gathertocraft.ironchest.blocks.blockentities
 
 import com.gathertocraft.ironchest.blocks.ChestTypes
 import net.minecraft.core.BlockPos
-import net.minecraft.core.HolderLookup
+import net.minecraft.core.HolderGetter
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
@@ -49,6 +49,6 @@ class CrystalChestEntity(pos: BlockPos, state: BlockState) : GenericChestEntity(
     override fun getUpdatePacket(): Packet<ClientGamePacketListener>? =
         ClientboundBlockEntityDataPacket.create(this)
 
-    override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag =
+    override fun getUpdateTag(registries: HolderGetter.Provider): CompoundTag =
         saveWithoutMetadata(registries)
 }

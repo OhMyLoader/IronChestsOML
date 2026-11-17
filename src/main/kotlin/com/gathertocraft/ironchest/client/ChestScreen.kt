@@ -5,7 +5,7 @@ import com.gathertocraft.ironchest.core.ContainerGuiLayout
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler
 import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.client.renderer.RenderPipelines
+import net.minecraft.client.gui.GuiPipeline
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.Identifier
 import net.minecraft.world.entity.player.Inventory
@@ -43,8 +43,8 @@ class ChestScreen(menu: ChestScreenHandler, inventory: Inventory, title: Compone
         }
     }
 
-    override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTick: Float) {
-        super.extractBackground(graphics, mouseX, mouseY, partialTick)
+    override fun extractBackground(graphics: GuiGraphicsExtractor) {
+        super.extractBackground(graphics)
         val xo = leftPos
         val yo = topPos
 
@@ -131,7 +131,7 @@ class ChestScreen(menu: ChestScreenHandler, inventory: Inventory, title: Compone
         width: Int,
         height: Int,
     ) {
-        graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0.0f, 0.0f, width, height, width, height)
+        graphics.blit(GuiPipeline.TEXTURED, texture, x, y, 0.0f, 0.0f, width, height, width, height)
     }
 
     private fun blitVanillaRegion(
@@ -144,7 +144,7 @@ class ChestScreen(menu: ChestScreenHandler, inventory: Inventory, title: Compone
         v: Float,
     ) {
         graphics.blit(
-            RenderPipelines.GUI_TEXTURED,
+            GuiPipeline.TEXTURED,
             ContainerGuiLayout.VANILLA_BACKGROUND,
             x,
             y,

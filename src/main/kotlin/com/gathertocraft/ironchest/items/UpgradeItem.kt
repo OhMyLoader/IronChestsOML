@@ -73,21 +73,23 @@ class UpgradeItem(private val target: ChestTypes, properties: Properties) : Item
             newBlockEntity.setChanged()
         }
 
+        // 26.4 made block sounds data-driven (`BlockSoundSet` keys), and the set a state carries has
+        // no public accessor; the swap plays the chest's own close/open sounds instead.
         level.playSound(
             null,
             blockPos,
-            oldState.soundType.breakSound,
+            net.minecraft.sounds.SoundEvents.CHEST_CLOSE,
             SoundSource.BLOCKS,
-            oldState.soundType.volume,
-            oldState.soundType.pitch,
+            1.0f,
+            1.0f,
         )
         level.playSound(
             null,
             blockPos,
-            newState.soundType.placeSound,
+            net.minecraft.sounds.SoundEvents.CHEST_OPEN,
             SoundSource.BLOCKS,
-            newState.soundType.volume,
-            newState.soundType.pitch,
+            1.0f,
+            1.0f,
         )
         if (!player.abilities.instabuild) {
             context.itemInHand.shrink(1)

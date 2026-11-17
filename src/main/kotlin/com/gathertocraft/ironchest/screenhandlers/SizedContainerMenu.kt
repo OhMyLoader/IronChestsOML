@@ -65,6 +65,7 @@ open class SizedContainerMenu(
                         column + row * 9 + 9,
                         playerInventoryX + column * ContainerGuiLayout.SLOT_SIZE,
                         playerInventoryY + row * ContainerGuiLayout.SLOT_SIZE,
+                        Slot.Section.INVENTORY,
                     ),
                 )
             }
@@ -76,6 +77,7 @@ open class SizedContainerMenu(
                     column,
                     playerInventoryX + column * ContainerGuiLayout.SLOT_SIZE,
                     playerInventoryY + hotbarOffset,
+                    Slot.Section.HOTBAR,
                 ),
             )
         }
@@ -129,7 +131,7 @@ open class SizedContainerMenu(
     /** Chest slot filtering via `Container.canPlaceItem`: filters what items can be placed in a
      * slot by clicking or shift-clicking. */
     private class ConstrainedSlot(container: Container, private val slotIndex: Int, x: Int, y: Int) :
-        Slot(container, slotIndex, x, y) {
+        Slot(container, slotIndex, x, y, Slot.Section.CONTAINER) {
 
         override fun mayPlace(stack: ItemStack): Boolean =
             container.canPlaceItem(slotIndex, stack)
