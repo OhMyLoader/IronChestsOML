@@ -1,0 +1,4 @@
+# Sources are LF: a contributor whose git has core.autocrlf=true would otherwise rewrite whole
+# files on checkout or `git apply`. Extend this list with repository-specific paths (scripts,
+# generated outputs) and state the reason per line.
+* text=auto eol=lf

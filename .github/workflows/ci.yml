@@ -1,0 +1,26 @@
+# The gate stub: machinery lives in the Foundation reusable workflow, pinned to @v1.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ubuntu:
+    uses: OhMyLoader/Foundation/.github/workflows/kotlin-ci.yml@v1
+    with:
+      runs-on: ubuntu-latest
+      # linux-x64 bundle of the pinned 27.0.2-internal JDK (JDK-8394484; see Foundation README)
+      java-bundle-url: https://github.com/OhMyLoader/OhMyLoader/releases/download/jdk-27.0.2-internal/bundles-linux-x64.zip
+      java-bundle-sha256: ce2052f923109e165e531c1ceada67e583347a4de757c40db5edcf46fc7270a8
+      gradle-tasks: build test
+  windows:
+    uses: OhMyLoader/Foundation/.github/workflows/kotlin-ci.yml@v1
+    with:
+      runs-on: windows-latest
+      # windows-x64 bundle; the installer's platform branches and CRLF handling are Windows-only
+      java-bundle-url: https://github.com/OhMyLoader/OhMyLoader/releases/download/jdk-27.0.2-internal/bundles-windows-x64.zip
+      java-bundle-sha256: 196cb71a10b9ab9e0f90360c7ce8600019c302b11b74708ef354cb1b47e3964b
+      gradle-tasks: build test
