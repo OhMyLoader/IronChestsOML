@@ -17,17 +17,11 @@ import org.ohmyloader.api.core.OMLRegistryInitializer
 
 /**
  * Iron Chests on OML — a GPL-3.0 port of [4nner/IronChests](https://github.com/4nner/IronChests)
- * (26.3 fabric/common line). The differences are exactly where the Fabric API surface meets OML's:
- *
- * - Fabric `ModInitializer` runs before registry freeze → OML's registry-declare phase
- *   ([OMLRegistryInitializer]) is the registration point; `ClientModInitializer` work rides
- *   [OMLModInitializer.onInitialize] guarded by the client side
- * - `FabricBlockEntityTypeBuilder` / `FabricCreativeModeTab` → the vanilla registry constructors
- * - the three Fabric mixins ([ChestBlockEntityViewerCountMixin]-alike, its accessor, and the
- *   copper-golem interaction) → OML `@Hooked` carriers, same anchors
- * - ironchest.json → the loader's TOML config; row counts per tier stay configurable
- *
- * Not ported (v2): the ironcore key/lock system and the hand truck.
+ * (26.3 fabric/common line). Registration goes through OML's registry-declare phase, block-entity
+ * and creative-tab construction through the vanilla registry constructors, the three Fabric mixins
+ * through OML `@Hooked` carriers with the same anchors, and ironchest.json through the loader's
+ * TOML config; row counts per tier stay configurable. Not ported (v2): the ironcore key/lock
+ * system and the hand truck.
  */
 @Mod(id = "ironchest", name = "Iron Chests OML", version = "0.1.0")
 class IronChestsOML : OMLRegistryInitializer, OMLModInitializer {

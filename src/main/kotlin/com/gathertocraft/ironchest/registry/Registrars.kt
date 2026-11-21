@@ -20,7 +20,7 @@ import org.ohmyloader.api.OMLCreativeTabs
 import org.ohmyloader.api.OMLRegistration
 
 /** Every registration, expressed through the OML registration helpers: they apply the resource
- * keys, replay the block-state bookkeeping (registry + caches) and absorb the 26.3 private-entry
+ * keys, replay the block-state bookkeeping (registry + caches) and absorb the game's private-entry
  * workarounds, so this file names only tiers and factories. Each chest tier binds its registered
  * instances back onto the enum, so common code never dereferences a registry. */
 object Registrars {
